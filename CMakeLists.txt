@@ -12,6 +12,6 @@ set(SOURCE_FILES
         src/TCPclient.c
         src/TCPserver.c
         src/TCPutil.c
-        src/testTCPserver.c src/testTCPclient.c)
+        src/testTCPserver.c src/testTCPclient.c src/UDPserver.c include/UDPserver.h src/UDPclient.c include/UDPclient.h src/UDPutil.c include/UDPutil.h)
 
 add_executable(Clibnetwork ${SOURCE_FILES})

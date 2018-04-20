@@ -12,7 +12,6 @@ char *TCPrecv(int socketClient) {
 
     int size = 0;
     char *msg = malloc(sizeof(char));
-    char c;
     do {
         recv(socketClient, msg+size, 1, 0);
         //printf("%c ", msg[size]);
@@ -25,5 +24,8 @@ char *TCPrecv(int socketClient) {
     return msg;
 }
 
+int TCPclose(int socket) {
+    return close(socket);
+}
 
 
