@@ -10,23 +10,20 @@ int TCPsend(int socketClient, const char *query) {
 
 char *TCPrecv(int socketClient) {
 
-    if (socketClient == -1) {
-        return "-1";
-    }
-
-    int size = 1;
+    int size = 0;
     char *msg = malloc(sizeof(char));
     char c;
-
     do {
-
-        recv(socketClient, &c, 1, 0);
-        msg[size - 1] = c;
+        recv(socketClient, msg+size, 1, 0);
+        //printf("%c ", msg[size]);
         msg = realloc(msg, sizeof(char) * ++size);
+        //printf("%d\n", size);
 
-    } while (c != '\0');
+    } while (msg[size-1] != '\0');
+    msg[size - 1] = '\0';
 
     return msg;
 }
+
 
 

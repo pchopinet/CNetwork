@@ -30,30 +30,30 @@ int TCPacceptConnection(int socketServer) {
     return clientSocket;
 }
 
-struct socketThread {
-    int clientSocket;
-    int serverSocket;
-};
 
 void *TCPthreadConnection(void *socket) {
-    struct socketThread *socketThread = (struct socketThread *) socket;
+    int *socketClient = (int *) socket;
+    char *c = TCPrecv(*socketClient);
 
+    printf("Recv : %s\n", c);
 
-    close(socketThread->clientSocket);
-    free(socketThread);
+    TCPsend(*socketClient, c);
+
+    close(*socketClient);
+    free(socketClient);
 }
 
 void TCPserver(int port) {
     int serverSocket = TCPcreateServer(port);
     printf("#######################\nServer Socket : %d\n", serverSocket);
     while (1) {
-        int clientSocket = TCPacceptConnection(serverSocket);
-        if (clientSocket == -1) exit(-1);
-        printf("#######################\nClient Socket : %d\n", clientSocket);
-        struct socketThread *socketThread = malloc(sizeof(struct socketThread));
-        socketThread->clientSocket = clientSocket;
-        socketThread->serverSocket = serverSocket;
-        pthread_t p = (pthread_t) pthread_create(&p, NULL, TCPthreadConnection, (void*)socketThread);
+        int *clientSocket = malloc(sizeof(int));
+        *clientSocket = TCPacceptConnection(serverSocket);
+        pthread_t p;
+        if (*clientSocket == -1) exit(-1);
+        printf("#######################\nClient Socket : %d\n", *clientSocket);
+
+        pthread_create(&p, NULL, TCPthreadConnection, (void *) clientSocket);
     }
     close(serverSocket);
 }

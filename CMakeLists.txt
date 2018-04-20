@@ -3,6 +3,8 @@ project(Clibnetwork)
 
 set(CMAKE_CXX_STANDARD 11)
 
+include_directories(.)
+
 set(SOURCE_FILES
         include/TCPclient.h
         include/TCPserver.h
@@ -10,6 +12,6 @@ set(SOURCE_FILES
         src/TCPclient.c
         src/TCPserver.c
         src/TCPutil.c
-        serv_TP1A_info_tcp.c)
+        src/testTCPserver.c src/testTCPclient.c)
 
 add_executable(Clibnetwork ${SOURCE_FILES})

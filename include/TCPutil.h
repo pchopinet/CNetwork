@@ -19,5 +19,6 @@ int TCPsend(int socketClient, const char *query);
 
 char *TCPrecv(int socketServer);
 
+char * TCPrecvSimple(int socketClient);
 
 #endif //LIBNETWORK_TCPUTIL_H
