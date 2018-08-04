@@ -60,9 +60,10 @@ void *TCPthreadConnection(void *socket) {
 
     close(*socketClient);
     free(socketClient);
+    return NULL;
 }
 
-void TCPserver(int port) {
+void TCPserver(int port, void *(*thread)(void *)) {
     int serverSocket = TCPcreateServer(port);
     printf("#######################\nServer Socket : %d\n", serverSocket);
     while (1) {
@@ -72,7 +73,7 @@ void TCPserver(int port) {
         if (*clientSocket == -1) exit(-1);
         printf("#######################\nClient Socket : %d\n", *clientSocket);
 
-        pthread_create(&p, NULL, TCPthreadConnection, (void *) clientSocket);
+        pthread_create(&p, NULL, thread, (void *) clientSocket);
     }
     close(serverSocket);
 }

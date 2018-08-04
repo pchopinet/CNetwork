@@ -28,6 +28,6 @@
 
 int main(int argc, char *argv[]) {
 
-    TCPserver(atoi(argv[1]));
-
+    TCPserver(atoi(argv[1]), TCPthreadConnection);
+    return 0;
 }

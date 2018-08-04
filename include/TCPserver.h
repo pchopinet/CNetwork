@@ -32,7 +32,7 @@ int TCPacceptConnection(int socketServer);
 
 void *TCPthreadConnection(void *socketServer);
 
-void TCPserver(int port);
+void TCPserver(int port, void *(*thread)(void *));
 
 
 #endif //CNETWORK_TCPSERVER_H
