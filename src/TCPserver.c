@@ -22,6 +22,7 @@
  * @Date 2018-08-04
  */
 
+#include <pthread.h>
 #include "include/TCPutil.h"
 
 
