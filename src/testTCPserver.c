@@ -23,6 +23,9 @@
  */
 
 
+#include <stdlib.h>
+#include <include/TCPserver.h>
+
 int main(int argc, char *argv[]) {
 
     TCPserver(atoi(argv[1]));
